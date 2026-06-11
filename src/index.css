@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --color-evd-blue: #2ea3f2;
+  --color-evd-deep: #0c4da2;
+  --color-evd-dark: #282f36;
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: #666;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+}
+
+/* ---- Animated aurora background ---- */
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.45;
+  will-change: transform;
+}
+
+@keyframes aurora-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8vw, -6vh) scale(1.15); }
+  66% { transform: translate(-6vw, 7vh) scale(0.95); }
+}
+
+@keyframes aurora-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-9vw, 5vh) scale(1.1); }
+  66% { transform: translate(7vw, -5vh) scale(0.9); }
+}
+
+@keyframes aurora-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1.05); }
+  50% { transform: translate(5vw, 8vh) scale(0.92); }
+}
+
+.aurora-1 { animation: aurora-drift-1 22s ease-in-out infinite; }
+.aurora-2 { animation: aurora-drift-2 28s ease-in-out infinite; }
+.aurora-3 { animation: aurora-drift-3 34s ease-in-out infinite; }
+
+/* ---- Floating particles ---- */
+@keyframes particle-float {
+  0% { transform: translateY(0) translateX(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-110vh) translateX(4vw); opacity: 0; }
+}
+
+.particle {
+  position: absolute;
+  bottom: -2vh;
+  border-radius: 9999px;
+  background: radial-gradient(circle, rgba(46, 163, 242, 0.9) 0%, rgba(46, 163, 242, 0) 70%);
+  animation: particle-float linear infinite;
+  will-change: transform, opacity;
+}
+
+/* ---- Pulsing live dot ---- */
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+.pulse-ring::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: currentColor;
+  animation: pulse-ring 1.6s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
+
+/* ---- Gradient text shimmer ---- */
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.shimmer-text {
+  background: linear-gradient(110deg, #0c4da2 20%, #2ea3f2 45%, #6cc4ff 55%, #0c4da2 80%);
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-1, .aurora-2, .aurora-3, .particle, .pulse-ring::after, .shimmer-text {
+    animation: none;
+  }
+  html { scroll-behavior: auto; }
+}
