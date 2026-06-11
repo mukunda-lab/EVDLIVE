@@ -1,20 +1,46 @@
-const PARTICLES = Array.from({ length: 18 }, (_, i) => ({
+const RISING = Array.from({ length: 14 }, (_, i) => ({
   left: `${(i * 53) % 100}%`,
-  size: 4 + ((i * 7) % 9),
-  duration: 14 + ((i * 5) % 16),
-  delay: (i * 1.7) % 14,
+  size: 3 + ((i * 7) % 7),
+  duration: 18 + ((i * 5) % 18),
+  delay: (i * 2.1) % 16,
+}))
+
+const TWINKLES = Array.from({ length: 26 }, (_, i) => ({
+  left: `${(i * 37) % 100}%`,
+  top: `${(i * 61) % 100}%`,
+  size: 1 + (i % 3),
+  duration: 2.5 + ((i * 3) % 5),
+  delay: (i * 1.3) % 5,
 }))
 
 export default function AnimatedBackground() {
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-white" aria-hidden="true">
-      <div className="aurora-blob aurora-1 left-[-10%] top-[-15%] h-[55vh] w-[55vw] bg-evd-blue/40" />
-      <div className="aurora-blob aurora-2 right-[-15%] top-[20%] h-[60vh] w-[50vw] bg-evd-deep/30" />
-      <div className="aurora-blob aurora-3 bottom-[-20%] left-[20%] h-[50vh] w-[60vw] bg-sky-200/60" />
-      {PARTICLES.map((p, i) => (
+    <div
+      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      style={{ background: 'linear-gradient(90deg, #0a1423 22%, #231724 91%)' }}
+      aria-hidden="true"
+    >
+      <div className="aurora-blob aurora-1 left-[-12%] top-[-15%] h-[55vh] w-[55vw] bg-evd-navy" />
+      <div className="aurora-blob aurora-2 right-[-15%] top-[25%] h-[60vh] w-[50vw] bg-[#574da4]" />
+      <div className="aurora-blob aurora-3 bottom-[-20%] left-[15%] h-[50vh] w-[60vw] bg-evd-line" />
+      {TWINKLES.map((t, i) => (
         <span
-          key={i}
-          className="particle"
+          key={`t${i}`}
+          className="twinkle"
+          style={{
+            left: t.left,
+            top: t.top,
+            width: t.size,
+            height: t.size,
+            animationDuration: `${t.duration}s`,
+            animationDelay: `${t.delay}s`,
+          }}
+        />
+      ))}
+      {RISING.map((p, i) => (
+        <span
+          key={`r${i}`}
+          className="star"
           style={{
             left: p.left,
             width: p.size,
@@ -24,7 +50,6 @@ export default function AnimatedBackground() {
           }}
         />
       ))}
-      <div className="absolute inset-0 bg-white/55" />
     </div>
   )
 }

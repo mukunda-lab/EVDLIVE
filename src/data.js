@@ -24,7 +24,7 @@ export const NAV_LINKS = [
   { label: 'LIVE', href: 'https://live.evdsky.com/' },
 ]
 
-export const MEDITATION_CARDS = [
+export const MEDITATION_POSTS = [
   {
     title: 'Eres el efecto de tu causa',
     href: 'https://shaktianandama.com/2026/06/03/eres-el-efecto-de-tu-causa/',
@@ -53,18 +53,21 @@ export const ACTIVITIES = [
     time: '6pm (COL-ECU)',
     img: 'https://live.evdsky.com/wp-content/uploads/2025/07/chalisa.jpg',
     href: 'https://escuelavaloresdivinos.org/chalisa',
+    buttonColor: '#ad2a5b',
   },
   {
     title: ['Medita', 'junto a Mataji', 'Shaktiananda'],
     time: '6:30pm (COL-ECU)',
     img: 'https://live.evdsky.com/wp-content/uploads/2025/07/Medita-junto-a-Mataji.jpg',
     href: 'https://escuelavaloresdivinos.org/medita',
+    buttonColor: '#1d3d73',
   },
   {
     title: ['Kirtan &', 'Fuego Sagrado'],
     time: '6:30pm (COL-ECU)',
     img: 'https://live.evdsky.com/wp-content/uploads/2025/07/fuego-sagrado-1.jpg',
     href: 'https://escuelavaloresdivinos.org/fuegosagrado',
+    buttonColor: '#ba6a26',
   },
 ]
 
@@ -73,11 +76,15 @@ export const IMAGES = {
   offline: 'https://live.evdsky.com/wp-content/uploads/2026/02/No-transmitimos.jpg',
   playerCover: 'https://live.evdsky.com/wp-content/uploads/2022/05/live-portada-player-v1.jpg',
   fondoMa: 'https://live.evdsky.com/wp-content/uploads/2023/05/fondo-Ma.jpg',
-  logo: 'https://live.evdsky.com/wp-content/uploads/2022/05/cropped-logo-EVD-SKY-dodecaedro-180x180.png',
+  diviLogo: 'https://live.evdsky.com/wp-content/themes/Divi/images/logo.png',
 }
 
 export const EMBEDS = {
   youtube: 'https://www.youtube.com/embed/AgD7jNPULsI?si=MKZU0uQbmf6b3d7Y',
+  youtubeChannelId: 'UCs6BtP_OoMkh18UjszWIuqg',
   podcast: 'https://anchor.fm/shaktianandama/embed',
   subscribeForm: 'https://api.leadconnectorhq.com/widget/form/1mA20h8rIqVPdvsD22Dg',
 }
+
+// Cambiar a true cuando haya transmisión: oculta la portada y muestra el player de YouTube
+export const IS_LIVE = false

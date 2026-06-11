@@ -34,34 +34,30 @@ export default function Header() {
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/85 shadow-lg shadow-evd-deep/5 backdrop-blur-md'
-          : 'bg-white/60 backdrop-blur-sm'
+      className={`fixed inset-x-0 top-0 z-50 bg-white transition-shadow duration-300 ${
+        scrolled ? 'shadow-md shadow-black/20' : 'shadow-[0_1px_0_rgba(0,0,0,0.1)]'
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8">
-        <a href="https://live.evdsky.com/" className="flex items-center gap-3">
-          <img src={IMAGES.logo} alt="Escuela Valores Divinos" className="h-11 w-11" />
-          <div className="leading-tight">
-            <span className="block font-heading text-sm font-bold tracking-wide text-evd-dark">
-              Escuela Valores Divinos
-            </span>
-            <span className="block font-heading text-xs font-semibold tracking-[0.3em] text-evd-blue">
-              LIVE
-            </span>
-          </div>
+        <a href="https://live.evdsky.com/" className="shrink-0">
+          <img
+            src={IMAGES.diviLogo}
+            alt="Escuela Valores Divinos - LIVE"
+            width="93"
+            height="43"
+            className="h-[43px] w-auto"
+          />
         </a>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-5 xl:flex" aria-label="Navegación principal">
+        <nav className="hidden items-center gap-5 font-heading xl:flex" aria-label="Navegación principal">
           <div
             className="relative"
             onMouseEnter={() => setCountriesOpen(true)}
             onMouseLeave={() => setCountriesOpen(false)}
           >
             <button
-              className="flex items-center gap-1 text-[13px] font-semibold tracking-wide text-evd-dark transition-colors hover:text-evd-blue"
+              className="flex items-center gap-1 text-sm font-normal text-[#666] transition-colors hover:text-[#2ea3f2]"
               aria-expanded={countriesOpen}
               onClick={() => setCountriesOpen((v) => !v)}
             >
@@ -74,13 +70,13 @@ export default function Header() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute left-0 top-full w-56 rounded-xl border border-evd-blue/10 bg-white/95 py-2 shadow-xl shadow-evd-deep/10 backdrop-blur-md"
+                  className="absolute left-0 top-full w-60 border-t-[3px] border-[#2ea3f2] bg-white py-3 shadow-[0_2px_5px_rgba(0,0,0,0.1)]"
                 >
                   {COUNTRIES.map((c) => (
                     <li key={c.label}>
                       <a
                         href={c.href}
-                        className="block px-5 py-2 text-[13px] font-medium text-evd-dark transition-all hover:bg-evd-blue/5 hover:pl-6 hover:text-evd-blue"
+                        className="block px-5 py-2 text-sm text-[#666] transition-all hover:bg-black/5 hover:pl-6"
                       >
                         {c.label}
                       </a>
@@ -94,9 +90,7 @@ export default function Header() {
             <a
               key={l.label}
               href={l.href}
-              className={`relative text-[13px] font-semibold tracking-wide transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-evd-blue after:transition-all after:duration-300 hover:after:w-full ${
-                l.label === 'LIVE' ? 'text-evd-blue' : 'text-evd-dark hover:text-evd-blue'
-              }`}
+              className="relative text-sm font-normal text-[#666] transition-colors after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#2ea3f2] after:transition-all after:duration-300 hover:text-[#2ea3f2] hover:after:w-full"
             >
               {l.label}
             </a>
@@ -105,7 +99,7 @@ export default function Header() {
 
         {/* Mobile hamburger */}
         <button
-          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded-lg text-evd-dark transition-colors hover:bg-evd-blue/10 xl:hidden"
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 rounded text-[#2ea3f2] xl:hidden"
           onClick={() => setMobileOpen((v) => !v)}
           aria-label={mobileOpen ? 'Cerrar menú' : 'Abrir menú'}
           aria-expanded={mobileOpen}
@@ -124,12 +118,12 @@ export default function Header() {
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="overflow-hidden border-t border-evd-blue/10 bg-white/95 backdrop-blur-md xl:hidden"
+            className="overflow-hidden border-t border-black/10 bg-white font-heading xl:hidden"
             aria-label="Navegación móvil"
           >
             <div className="max-h-[70vh] overflow-y-auto px-6 py-4">
               <button
-                className="flex w-full items-center justify-between py-2.5 text-sm font-semibold text-evd-dark"
+                className="flex w-full items-center justify-between py-2.5 text-sm text-[#666]"
                 onClick={() => setMobileCountriesOpen((v) => !v)}
                 aria-expanded={mobileCountriesOpen}
               >
@@ -145,7 +139,7 @@ export default function Header() {
                   >
                     {COUNTRIES.map((c) => (
                       <li key={c.label}>
-                        <a href={c.href} className="block py-2 text-sm text-evd-dark/80 hover:text-evd-blue">
+                        <a href={c.href} className="block py-2 text-sm text-[#666] hover:text-[#2ea3f2]">
                           {c.label}
                         </a>
                       </li>
@@ -157,9 +151,7 @@ export default function Header() {
                 <a
                   key={l.label}
                   href={l.href}
-                  className={`block py-2.5 text-sm font-semibold ${
-                    l.label === 'LIVE' ? 'text-evd-blue' : 'text-evd-dark hover:text-evd-blue'
-                  }`}
+                  className="block py-2.5 text-sm text-[#666] hover:text-[#2ea3f2]"
                 >
                   {l.label}
                 </a>

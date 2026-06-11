@@ -1,11 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-evd-blue: #2ea3f2;
-  --color-evd-deep: #0c4da2;
-  --color-evd-dark: #282f36;
-  --font-heading: "Montserrat", sans-serif;
-  --font-body: "Open Sans", sans-serif;
+  --color-evd-cyan: #69e5e7;
+  --color-evd-cream: #e0d3ba;
+  --color-evd-cream-soft: #e0d4c0;
+  --color-evd-night: #0a1423;
+  --color-evd-plum: #231724;
+  --color-evd-magenta: #ad2a5b;
+  --color-evd-navy: #1d3d73;
+  --color-evd-orange: #ba6a26;
+  --color-evd-line: #387799;
+  --color-evd-border-cyan: #a4e5e8;
+  --font-heading: "Montserrat", Helvetica, Arial, Lucida, sans-serif;
+  --font-quote: "Alice", Georgia, "Times New Roman", serif;
+  --font-body: "Open Sans", Arial, sans-serif;
 }
 
 html {
@@ -14,8 +22,8 @@ html {
 
 body {
   font-family: var(--font-body);
-  color: #666;
-  background-color: #fff;
+  color: var(--color-evd-cream);
+  background: linear-gradient(90deg, #0a1423 22%, #231724 91%);
   overflow-x: hidden;
 }
 
@@ -23,51 +31,85 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
 }
 
-/* ---- Animated aurora background ---- */
+/* Cyan glow titles, as in the original (text-shadow 0 0 .13em #89e5e7) */
+.glow-cyan {
+  color: #69e5e7;
+  text-shadow: 0em 0em 0.13em #89e5e7;
+}
+
+/* ---- Animated aurora background (dark) ---- */
 .aurora-blob {
   position: absolute;
   border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.45;
+  filter: blur(100px);
+  opacity: 0.35;
   will-change: transform;
 }
 
 @keyframes aurora-drift-1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(8vw, -6vh) scale(1.15); }
-  66% { transform: translate(-6vw, 7vh) scale(0.95); }
+  33% { transform: translate(7vw, -5vh) scale(1.12); }
+  66% { transform: translate(-5vw, 6vh) scale(0.94); }
 }
 
 @keyframes aurora-drift-2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-9vw, 5vh) scale(1.1); }
-  66% { transform: translate(7vw, -5vh) scale(0.9); }
+  33% { transform: translate(-8vw, 5vh) scale(1.08); }
+  66% { transform: translate(6vw, -5vh) scale(0.92); }
 }
 
 @keyframes aurora-drift-3 {
-  0%, 100% { transform: translate(0, 0) scale(1.05); }
-  50% { transform: translate(5vw, 8vh) scale(0.92); }
+  0%, 100% { transform: translate(0, 0) scale(1.04); }
+  50% { transform: translate(4vw, 7vh) scale(0.94); }
 }
 
-.aurora-1 { animation: aurora-drift-1 22s ease-in-out infinite; }
-.aurora-2 { animation: aurora-drift-2 28s ease-in-out infinite; }
-.aurora-3 { animation: aurora-drift-3 34s ease-in-out infinite; }
+.aurora-1 { animation: aurora-drift-1 26s ease-in-out infinite; }
+.aurora-2 { animation: aurora-drift-2 32s ease-in-out infinite; }
+.aurora-3 { animation: aurora-drift-3 38s ease-in-out infinite; }
 
-/* ---- Floating particles ---- */
-@keyframes particle-float {
+/* ---- Star particles drifting upward ---- */
+@keyframes star-float {
   0% { transform: translateY(0) translateX(0); opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { transform: translateY(-110vh) translateX(4vw); opacity: 0; }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { transform: translateY(-110vh) translateX(3vw); opacity: 0; }
 }
 
-.particle {
+.star {
   position: absolute;
   bottom: -2vh;
   border-radius: 9999px;
-  background: radial-gradient(circle, rgba(46, 163, 242, 0.9) 0%, rgba(46, 163, 242, 0) 70%);
-  animation: particle-float linear infinite;
+  background: radial-gradient(circle, rgba(105, 229, 231, 0.8) 0%, rgba(105, 229, 231, 0) 70%);
+  animation: star-float linear infinite;
   will-change: transform, opacity;
+}
+
+/* ---- Twinkling fixed stars ---- */
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; }
+  50% { opacity: 0.7; }
+}
+
+.twinkle {
+  position: absolute;
+  border-radius: 9999px;
+  background: #89e5e7;
+  animation: twinkle ease-in-out infinite;
+}
+
+/* ---- Glowing section divider (radial #387799 + blurred twin) ---- */
+.glow-line {
+  height: 1px;
+  width: 100%;
+  background-image: radial-gradient(circle at center, #387799 0%, rgba(30, 40, 66, 0) 80%);
+}
+
+.glow-line-blur {
+  height: 6px;
+  width: 100%;
+  margin-top: -3px;
+  background-image: radial-gradient(circle at center, #387799 0%, rgba(30, 40, 66, 0) 43%);
+  filter: blur(9px);
 }
 
 /* ---- Pulsing live dot ---- */
@@ -85,24 +127,16 @@ h1, h2, h3, h4, h5, h6 {
   animation: pulse-ring 1.6s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
 }
 
-/* ---- Gradient text shimmer ---- */
-@keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Hero buttons grow letter-spacing on hover, like the original Divi buttons */
+.btn-hero {
+  transition: letter-spacing 300ms ease 0ms, color 300ms ease 0ms;
 }
-
-.shimmer-text {
-  background: linear-gradient(110deg, #0c4da2 20%, #2ea3f2 45%, #6cc4ff 55%, #0c4da2 80%);
-  background-size: 220% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 7s ease-in-out infinite;
+.btn-hero:hover {
+  letter-spacing: 1px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aurora-1, .aurora-2, .aurora-3, .particle, .pulse-ring::after, .shimmer-text {
+  .aurora-1, .aurora-2, .aurora-3, .star, .twinkle, .pulse-ring::after {
     animation: none;
   }
   html { scroll-behavior: auto; }
